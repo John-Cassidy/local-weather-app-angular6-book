@@ -1,0 +1,10 @@
+version: '2.1'
+
+services:
+  docker-node:
+    image: jpcassidy/local-weather-app
+    build: .
+    environment:
+      NODE_ENV: production
+    ports:
+      - 3000:80
