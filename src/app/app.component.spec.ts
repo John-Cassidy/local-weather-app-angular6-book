@@ -5,13 +5,22 @@ import { CurrentWeatherComponent } from './current-weather/current-weather.compo
 import { WeatherService } from './weather/weather.service';
 import { WeatherServiceFake } from './weather/weather.service.fake';
 import { MaterialModule } from './material.module';
+import { CitySearchComponent } from './city-search/city-search.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule, MaterialModule],
-      declarations: [AppComponent, CurrentWeatherComponent],
+      declarations: [AppComponent, CurrentWeatherComponent, CitySearchComponent],
       providers: [{ provide: WeatherService, useClass: WeatherServiceFake }],
+      imports: [
+        RouterTestingModule,
+        MaterialModule,
+        FormsModule,
+        ReactiveFormsModule,
+        NoopAnimationsModule,
+      ],
     }).compileComponents();
   }));
 
@@ -21,10 +30,10 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it('should render title in a h1 tag', () => {
+  it('should render title in a span tag', async(() => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
     expect(compiled.querySelector('span').textContent).toContain('LocalCast Weather');
-  });
+  }));
 });
