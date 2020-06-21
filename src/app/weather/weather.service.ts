@@ -31,7 +31,10 @@ export interface IWeatherService {
 export class WeatherService implements IWeatherService {
   constructor(private httpClient: HttpClient) {}
 
-  getCurrentWeather(city: string, country: string): Observable<ICurrentWeather> {
+  getCurrentWeather(
+    city: string,
+    country: string
+  ): Observable<ICurrentWeather> {
     return this.httpClient
       .get<ICurrentWeatherData>(
         `${environment.baseUrl}api.openweathermap.org/data/2.5/weather?` +
@@ -39,7 +42,9 @@ export class WeatherService implements IWeatherService {
       )
       .pipe(map((data) => this.tranformToICurrentWeather(data)));
   }
-  private tranformToICurrentWeather(data: ICurrentWeatherData): ICurrentWeather {
+  private tranformToICurrentWeather(
+    data: ICurrentWeatherData
+  ): ICurrentWeather {
     return {
       city: data.name,
       country: data.sys.country,
